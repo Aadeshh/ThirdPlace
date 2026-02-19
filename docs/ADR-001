@@ -1,0 +1,26 @@
+ADR-001: Core Technology Stack & Hybrid Microservice Architecture
+
+Status: Accepted
+
+Date: 2026-02-19
+
+Context: We need a social platform that is high-performance (to handle real-time activity feeds) but also AI-heavy (to parse complex user "vibes" and interests). As a student founder, we need a stack that is cost-effective and scalable.
+
+The Decision
+We will use a Hybrid Microservice Architecture consisting of:
+
+Go (Golang): For the core backend (Auth, Social Graph, Activity Retrieval).
+
+Python (FastAPI): For the "Brain" service (LLM parsing, Vector embeddings).
+
+Rationale
+Performance vs. Intelligence: Go is unmatched for concurrency and speed in networking. Python is the industry standard for AI/ML. By splitting them, we get the best of both worlds.
+
+Security: This separation allows us to isolate the "vices" processing logic from the public-facing social features.
+
+Sustainability: Go’s low memory footprint reduces server costs. Python allows us to use Small Language Models (SLMs) like Phi-3, which are cheaper and greener than massive LLM calls.
+
+Consequences
+Complexity: We have to manage two languages, but the monorepo structure and Docker will mitigate this.
+
+Type Safety: We will maintain high quality by using Pydantic (Python) and Go’s native typing to ensure no "leaky" data between services.
